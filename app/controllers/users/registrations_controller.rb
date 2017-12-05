@@ -10,8 +10,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super do |r|
-      acc = Account.new(:user_id => r.id)
-      acc.save
+      Account.create(:user_id => r.id)
+      UserMailer.signup_confirmation(r).deliver
     end
   end
 
