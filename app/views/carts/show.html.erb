@@ -4,6 +4,24 @@
     <p> Unit Price: <%= number_to_currency item.product.price %> | Quantity: <%= item.quantity %> | Total Price: <%= number_to_currency (item.product.price * item.quantity) %></p>
   <% end %>
   <p>Your Total: <%= number_to_currency current_order.total_price %></p>
+
+  <form action="/charges" method="POST">
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+  <script
+    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+    data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+    data-amount="<%= number_to_currency current_order.total_price %>"
+    data-name="Stripe.com"
+    data-description="Widget"
+    data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+    data-locale="auto"
+    data-email="<%= current_user.email %>"
+    data-zip-code="true"
+    data-billing-address="true"
+    data-shipping-address="true">
+  </script>
+  </form>
+
 <% else %>
   <p>Your shopping cart is empty.</p>
 <% end %>

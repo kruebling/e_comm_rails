@@ -7,4 +7,11 @@ class UserMailer < ApplicationMailer
 
     mail to: user.email, subject: "Sign Up Confirmation"
   end
+
+  def checkout_confirmation(user)
+    @user = user
+    @greeting = "Checkout Confirmation"
+
+    mail to: user.email, subject: "Checkout Confirmation"
+  end
 end
