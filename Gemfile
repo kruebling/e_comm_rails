@@ -53,6 +53,7 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'simplecov', require: false
   gem 'dotenv-rails'
+  gem 'database_cleaner'
 end
 
 group :development do
