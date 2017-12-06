@@ -11,7 +11,7 @@ class ChargesController < ApplicationController
     charge = StripeTool.create_charge(customer_id: customer.id,
                                       amount: (@amount.round) * 100,
                                       description: @description)
-
+  current_order.update(:status => 'pending')
   session[:order_id] = nil
   UserMailer.checkout_confirmation(customer).deliver
   rescue Stripe::CardError => e
