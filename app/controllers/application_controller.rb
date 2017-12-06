@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
       Order.find(session[:order_id])
     else
       if current_user
-        Order.new(:account_id => current_user.account.id)
+        Order.new(:account_id => current_user.account.id, :status => 'pending')
       else
         Order.new
       end

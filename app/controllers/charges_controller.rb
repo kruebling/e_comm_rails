@@ -12,7 +12,6 @@ class ChargesController < ApplicationController
                                       amount: (@amount.round) * 100,
                                       description: @description)
 
-  current_order.destroy
   session[:order_id] = nil
   UserMailer.checkout_confirmation(customer).deliver
   rescue Stripe::CardError => e
