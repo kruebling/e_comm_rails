@@ -11,7 +11,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     super do |r|
       Account.create(:user_id => r.id)
-      UserMailer.signup_confirmation(r).deliver
+      if r.id != nil
+        UserMailer.signup_confirmation(r).deliver
+      end
     end
   end
 
@@ -40,6 +42,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # protected
+  #
+  # def update_resource(resource, params)
+  #   resource.update_without_password(params)
+  # end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params
