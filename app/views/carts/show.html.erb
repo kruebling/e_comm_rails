@@ -1,15 +1,19 @@
 <% if @order_items.any? %>
   <% @order_items.sort.each do |item| %>
     <p><%= item.product.name %> | <%= link_to "Delete", order_item_path(item), :data => {:confirm => "You sure?", :method => "delete"} %></p>
-    <p> Unit Price: <%= number_to_currency item.product.price %> | Quantity: <%= item.quantity %>
+    <p> Unit Price: <%= number_to_currency item.product.price %>
     | Total Price: <%= number_to_currency (item.product.price * item.quantity) %></p>
-    <%= form_for item do |f| %>
+    <%= form_for item, :html => {:id => item.id } do |f| %>
       <%= f.hidden_field :product_id, value: item.id %>
+      <%= f.label :quantity, class: 'control-label'  %>
       <% options = options_for_select(1..10, item.quantity) %>
-      <%= select_tag :quantity, options %>
-      <% if current_user %>
-        <%= f.submit "Update Quantity" %>
-      <% end %>
+      <%= select_tag :quantity, options, :class => item.id %>
+      <script type="text/javascript">
+        $('.<%= item.id %>').change(function(){
+          $('#<%= item.id %>').submit();
+          return false;
+      });
+      </script>
     <% end %>
     <hr>
   <% end %>
@@ -27,7 +31,6 @@
     data-locale="auto"
     data-bitcoin="true"
     data-email="<%= current_user.email %>"
-    data
     data-zip-code="true"
     data-billing-address="true"
     data-shipping-address="true">

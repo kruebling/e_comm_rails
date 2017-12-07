@@ -20,7 +20,10 @@ class OrderItemsController < ApplicationController
     @order_item = current_order.order_items.find(params[:id])
     @order_item.update(:quantity => params[:quantity])
     current_order.save
-    redirect_to cart_path
+    respond_to do |format|
+        format.html { redirect_to cart_path }
+        format.js
+      end
   end
 
   private
