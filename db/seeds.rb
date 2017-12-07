@@ -8,4 +8,3 @@ Product.destroy_all
 end
 
 p "Created #{Product.count} products"
- 
