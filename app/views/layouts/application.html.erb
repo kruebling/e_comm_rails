@@ -3,9 +3,9 @@
   <head>
     <title>ECom</title>
     <%= csrf_meta_tags %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag "autocomplete-rails.js" %>
   </head>
   <header>
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -25,10 +25,12 @@
       <ul class="navbar-nav ml-auto">
       <li class="nav-item"><%= link_to 'Cart', cart_path, class: 'nav-link' %></li>
       <li id="test" class="nav-item" style="color: white;"><%= number_to_currency current_order.total_price %></li>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
+      <div id="searchForm">
+        <%= form_tag(root_path, :method => "get", :class => "form-inline my-2 my-lg-0") do %>
+          <%= text_field_tag :search, params[:search], placeholder: "Search Products", :class => "form-control mr-sm-2" %>
+          <%= submit_tag "Search", :class => "btn btn-outline-success my-2 my-sm-0" %>
+        <% end %>
+      </div>
     </ul>
     </nav>
 

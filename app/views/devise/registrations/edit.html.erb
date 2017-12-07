@@ -1,77 +1,106 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<h2>Account Info: <%= current_user.username %></h2>
 
-<div class='container'>
-  <div class='card card-body'>
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: 'form-horizontal' }) do |f| %>
-    <%= devise_error_messages! %>
+<div class="row">
+  <div class="col-md-6">
+    <div class="container">
+      <div class='card card-body'>
+        <h3>Edit</h3>
+        <hr>
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: 'form-horizontal' }) do |f| %>
+        <%= devise_error_messages! %>
 
-    <div class="form-group">
-      <%= f.label :username, class: 'col-sm-2 control-label'  %>
-      <div class="col-sm-6">
-        <%= f.text_field :username, autofocus: true, class: 'form-control'  %>
+        <div class="form-group">
+          <%= f.label :username, class: 'control-label'  %>
+          <div class="col-sm-9">
+            <%= f.text_field :username, autofocus: true, class: 'form-control'  %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :first_name, class: 'control-label'  %>
+          <div class="col-sm-9">
+            <%= f.text_field :first_name, autofocus: true, class: 'form-control'  %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :last_name, class: 'control-label'  %>
+          <div class="col-sm-9">
+            <%= f.text_field :last_name, autofocus: true, class: 'form-control'  %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :email, class: 'control-label'  %>
+          <div class="col-sm-9">
+            <%= f.email_field :email, class: 'form-control'  %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :password, class: 'control-label'  %>
+          <div class="col-sm-9">
+            <i>(leave blank if you don't want to change it)</i>
+            <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :password_confirmation, class: 'control-label' %>
+          <div class="col-sm-9">
+            <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :current_password, class: 'control-label' %>
+          <div class="col-sm-9">
+            <i>(we need your current password to confirm your changes)</i>
+            <%= f.password_field :current_password, autocomplete: "off", class: 'form-control' %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-9">
+            <%= f.submit "Update", class: "btn btn-info" %>
+          </div>
+        </div>
+
+        <% end %>
+        <hr>
+        <h3>Cancel my account</h3>
+
+        <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-info" %></p>
+
+        <%= link_to "Back", :back %>
       </div>
     </div>
-
-    <div class="form-group">
-      <%= f.label :first_name, class: 'col-sm-2 control-label'  %>
-      <div class="col-sm-6">
-        <%= f.text_field :first_name, autofocus: true, class: 'form-control'  %>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :last_name, class: 'col-sm-2 control-label'  %>
-      <div class="col-sm-6">
-        <%= f.text_field :last_name, autofocus: true, class: 'form-control'  %>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :email, class: 'col-sm-2 control-label'  %>
-      <div class="col-sm-6">
-        <%= f.email_field :email, class: 'form-control'  %>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :password, class: 'col-sm-2 control-label'  %>
-      <div class="col-sm-6">
-        <i>(leave blank if you don't want to change it)</i>
-        <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :password_confirmation, class: 'col-sm-2 control-label' %>
-      <div class="col-sm-6">
-        <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :current_password, class: 'col-sm-2 control-label' %>
-      <div class="col-sm-6">
-        <i>(we need your current password to confirm your changes)</i>
-        <%= f.password_field :current_password, autocomplete: "off", class: 'form-control' %>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <div class="col-sm-offset-2 col-sm-6">
-        <%= f.submit "Update", class: "btn btn-info" %>
-      </div>
-    </div>
-
-    <% end %>
   </div>
-</div><br>
-
-<div class='container'>
-  <div class='card card-body'>
-    <h3>Cancel my account</h3>
-
-    <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-info" %></p>
-
-    <%= link_to "Back", :back %>
+  <div class="col-md-6" id='print'>
+    <div class="container">
+      <div class="card card-body">
+        <h3>Orders</h3>
+        <hr>
+        <ul>
+          <% Order.where(:account_id => current_user.id).each do |x| %>
+            <li><strong>Order ID: <%= x.id %>-<%= rand(1000..9999) %></strong></li>
+            <li>Order Status: <%= x.status %></li>
+            <li>Total Price: <%= number_to_currency x.total_price %></li>
+            <li>
+              <ul>
+                <% x.order_items.each do |y| %>
+                  <li><strong>Name: <%= y.product.name %></strong></li>
+                  <li>Qty: <%= y.quantity %></li>
+                  <li>Price: <%= number_to_currency y.product.price %></li>
+                  <br>
+                <% end %>
+              </ul>
+            </li>
+            <hr>
+          <% end %>
+        </ul>
+        <%= link_to 'Print For Your Records', 'user_registrations_path', :onclick => 'window.print();return false;'%>
+      </div>
+    </div>
   </div>
-</div><br>
+</div>

@@ -1,3 +1,23 @@
+/*This css will only works when you print*/
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #print, #print * {
+    visibility: visible;
+  }
+  #print {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}
+
+#print {
+  height: 1060px;
+  overflow-y: scroll;
+}
+
 #test {
   margin-top: 8px;
   margin-right: 10px;
