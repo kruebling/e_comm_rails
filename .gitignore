@@ -20,3 +20,5 @@
 .env
 
 public/system/products/images
+
+/config/aws.yml
