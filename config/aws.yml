@@ -1,5 +1,5 @@
 production:
-  access_key_id: AWSAccessKeyId
-  secret_access_key: AWSSecretKey
+  access_key_id: AWS_ACCESS_KEY_ID
+  secret_access_key: AWS_SECRET_ACCESS_KEY_ID
   s3_region: AWS_REGION
-  bucket: S3_BUCKET_NAME
+  bucket: S3_BUCKET
