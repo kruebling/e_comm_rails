@@ -89,7 +89,7 @@ Rails.application.configure do
   config.paperclip_defaults = {
   :storage => :s3,
   :preserve_files => true,
-  :s3_region => 'us-west-2'
+  :s3_region => 'us-west-2',
   :bucket => 'dave.and.keegsters'
 }
 
