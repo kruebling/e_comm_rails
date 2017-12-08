@@ -90,9 +90,11 @@ Rails.application.configure do
   :storage => :s3,
   :preserve_files => true,
   :s3_region => ENV['AWS_REGION'],
-  :bucket => ENV['S3_BUCKET_NAME'],
-  :access_key_id => ENV['AWSAccessKeyId'],
-  :secret_access_key => ENV['AWSSecretKey']
+  :s3_credentials => {
+    :bucket => ENV['S3_BUCKET_NAME'],
+    :access_key_id => ENV['AWSAccessKeyId'],
+    :secret_access_key => ENV['AWSSecretKey']
+  }
 }
 
   # Do not dump schema after migrations.
