@@ -4,7 +4,8 @@ git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
   "https://github.com/#{repo_name}.git"
 end
-
+# Amazon Web Services
+gem 'aws-sdk', '~> 2.3'
 # Checkout
 gem 'stripe'
 # Seeding
