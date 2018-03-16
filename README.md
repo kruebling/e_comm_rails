@@ -2,11 +2,22 @@
 A Ruby on Rails app to simulate an e-commerce webpage. Complete with Devise for authentication and Stripe for a mock check out.
 
 ## Installation
-`git clone https://github.com/kruebling/e_comm_rails`
+clone repo
+`git clone https://github.com/kruebling/e_comm_rails` 
+
+cd into the directory
 `cd e_comm_rails`
-`bundle`
+
+install ruby gems
+`bundle install`
+
+create the database
 `rails db:create`
+
+run database migrations
 `rails db:migrate`
+
+load the test database
 `rails db:test:prepare`
 
 ## Usage
